@@ -1,0 +1,134 @@
+<html>
+<title>ME ESP8266 an MqTT Lite Instance - IoT Francesco Barone BASE v 1.0</title>
+<head>
+<link rel="stylesheet" type="text/css" href="css/stats.css">
+
+<link rel="stylesheet" href="css/jqm.css" />
+<script src="js/jq.js"></script>
+<script src="js/jqm.js"></script>
+
+</head>
+
+<script>
+	function bit_test(num, bit){
+		return ((num>>bit) % 2 != 0)
+		}
+
+	function bit_set(num, bit){
+		return num | 1<<bit;
+		}
+
+	$(document).ready(function() {
+
+		$("#CLIENTS").text("0");
+		$("#SUBS").text("0");
+
+		$.get('data/config.val', function(data) {
+
+			var values = data.split("\n");
+			if(values.length>0)$("#SRVNAME").text( values[0] );
+			if(values.length>1)$("#SRVPORT").text( values[1] );
+			});
+
+		$("#refresh").click(function(e) {
+
+
+
+			});
+		
+		$("#admin").click(function(e) {
+			
+			e.preventDefault();
+			window.location ='/admin.htm';
+			});
+			
+		$("#stats").click(function(e) {
+			
+			e.preventDefault();
+			window.location ='/index.htm';
+			});
+			
+		$("#users").click(function(e) {
+			
+			e.preventDefault();
+			window.location ='/users.htm';
+			});
+			
+		$("#params").click(function(e) {
+			
+			e.preventDefault();
+			window.location ='/params.htm';
+			});
+			
+		});
+
+</script>
+
+<body>
+
+<div id="main" data-role="page">
+  <div data-role="header">
+    <h1>ME - MqTT Server Instance</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+
+	<table id="stats_div">
+		<tr><td style="vertical-align: top;">
+
+		<div id="title">Statistics</div>
+		<hr>
+
+		<div id="stats-content">
+
+			<table cellspacing="0" cellpadding="0" style="width:100%;display: table">
+			<tr class="settings"><td colspan=2>
+			<label  class="inline">
+				<p class="textclass">MqTT Server Settings</p>
+			</label>
+			</td></tr>
+			<tr class="settings">
+			<td>Server IP</td><td><label name="SRVNAME" id="SRVNAME"></td>
+			</tr>
+			<tr class="settings">
+			<td>TCPIP Port</td><td><label name="SRVPORT" id="SRVPORT"></td>
+			</tr>
+
+			<tr height=20px><td colspan=2></td></tr>
+			<tr>
+			<th align=center width=100px>Clients</th><th align=center width=100px>Subscribes</th>
+			</tr>
+			<tr>
+			<td align=center><label name="CLIENTS" id="CLIENTS"></td>
+			<td align=center><label name="SUBS" id="SUBS"></td>
+			</tr>
+
+			<tr height=20px><td colspan=2></td></tr>
+			<tr>
+			<th align=center colspan=2>Instance Activity</th>
+			</tr>
+			<tr>
+			<td colspan=2><div id="container" style="width:300px; height:400px;"></div></td>
+			</tr>
+
+			</table>
+
+		</div>
+
+		</td></tr>
+	</table>
+
+  </div>
+
+  <div data-role="footer">
+	<h1>
+	<a href="#" id="admin"><img src="img/admin.png" alt="Admin"></a>
+	<a href="#" id="stats"><img src="img/stats.png" alt="Stats"></a>
+	<a href="#" id="users"><img src="img/users.png" alt="Users"></a>
+	<a href="#" id="params"><img src="img/param.png" alt="Parameters"></a>
+	</h1>
+  </div>
+</div>
+
+</body>
+</html>

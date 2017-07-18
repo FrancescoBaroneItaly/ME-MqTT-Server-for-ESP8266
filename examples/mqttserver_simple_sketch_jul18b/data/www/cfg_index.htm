@@ -1,0 +1,157 @@
+<html>
+<title>ME ESP8266 an MqTT Lite Instance - IoT Francesco Barone BASE v 1.0</title>
+<head>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+
+<link rel="stylesheet" href="css/jqm.css" />
+<script src="js/jq.js"></script>
+<script src="js/jqm.js"></script>
+
+
+</head>
+
+<script>
+	function bit_test(num, bit){
+		return ((num>>bit) % 2 != 0)
+		}
+
+	function bit_set(num, bit){
+		return num | 1<<bit;
+		}
+
+	$(document).ready(function() {
+
+		$("#config").click(function(e) {
+
+			var rc=0;
+
+			if ($("#SRVNAME").val() == ''){
+
+				rc = bit_set(rc,0);
+				}
+
+			if($("#SURPORT").val() == '' ){
+
+				rc = bit_set(rc,1);
+				}
+
+			var ap_ssid = $("#AP_SSID").val();
+			var ap_password = $("#AP_PASSWORD").val();
+
+			if (ap_ssid == '' || ap_password == '') {
+
+				rc = bit_set(rc,2);
+
+				}
+
+			if(rc>0){
+
+				e.preventDefault();
+				$("#message").text("Missing fields, Please complete form RC="+rc);
+				$.mobile.changePage("#dialog_message", { transition: "pop",role: "dialog" })
+
+				$("#COL_SRVNAME").css("color", "black");
+				$("#COL_SRVPORT").css("color", "black");
+				$("#COL_SSID_AP").css("color", "black");
+
+				if(bit_test(rc,0))$("#COL_SRVNAME").css("color", "red");
+				if(bit_test(rc,1))$("#COL_SRVPORT").css("color", "red");
+				if(bit_test(rc,2))$("#COL_SSID_AP").css("color", "red");
+
+			}else{
+
+				$("#SET_CONFIG").submit();
+				}
+
+			});
+
+
+		});
+
+</script>
+
+<body>
+
+<div data-role="page">
+  <div data-role="header">
+    <h1>Config Module</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <form id="SET_CONFIG" action="/action/set_config" method="get">
+
+	  <table id="config_div">
+		<tr><td style="vertical-align: top;">
+
+		<div id="title">MqTT Lite - Config</div>
+		<hr>
+
+		<div id="config-content">
+			<table>
+			<tr><td id="COL_SRVNAME" width=100px>SERVER NAME</td><td style="text-align: right;"><input maxlength="16" type=text name="SRVNAME" id="SRVNAME" value="MqTT"></td></tr>
+			<tr><td id="COL_SRVPORT" width=100px>SERVER PORT</td><td style="text-align: right;"><input type=text name="SRVPORT" id="SRVPORT" value="1883"></td></tr>
+
+			<tr><td colspan=2>
+			<label class="inline">
+			<input type=checkbox name="SECURE" id="SECURE" value="enabled" checked> <p>Connect with User/Password</p>
+			</label>
+			</td></tr>
+
+			<tr><td id="COL_SSID_AP" width=100px>SSID AP</td><td style="text-align: right;"><input type=text name="AP_SSID" id="AP_SSID" value="MqTT"></td></tr>
+			<tr><td id="COL_PASSWORD_AP" width=100px>PASSWORD</td><td style="text-align: right;"><input type=text name="AP_PASSWORD" id="AP_PASSWORD" value="passw0rd"></td></tr>
+			<tr><td id="COL_IP" width=100px>IP Address</td><td style="text-align: right;">
+			<table><tr>
+
+			<td>
+			<div class="ui-block-a">
+				<input data-inline="true" style="width:50px" maxlength="3" type=text name="IP1" id="IP1" value="192">
+			</div>
+			</td>
+
+			<td>
+			<div class="ui-block-a">
+				<input data-inline="true" style="width:50px" maxlength="3" type=text name="IP2" id="IP2" value="168">
+			</div>
+			</td>
+
+			<td>
+			<div class="ui-block-a">
+				<input data-inline="true" style="width:50px" maxlength="3" type=text name="IP3" id="IP3" value="4">
+			</div>
+			</td>
+
+			<td>
+			<div class="ui-block-a">
+				<input data-inline="true" style="width:50px" maxlength="3" type=text name="IP4" id="IP4" value="1">
+			</div>
+			</td>
+
+			</tr>
+			</table>
+
+			</td></tr>
+
+			</table>
+		</div>
+
+
+		</td></tr>
+	  </table>
+
+	  </form>
+  </div>
+
+  <div data-role="footer">
+    <h1><a href="#" id="config"><img src="img/save_config.png" alt="Save Config"></a></h1>
+  </div>
+</div>
+
+<div data-role="dialog" id="dialog_message" title="Message">
+	<div data-role="content" style="text-align:center">
+		<p><label id="message"></label></p>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Ok</a>
+	</div>
+  </div>
+
+</body>
+</html>

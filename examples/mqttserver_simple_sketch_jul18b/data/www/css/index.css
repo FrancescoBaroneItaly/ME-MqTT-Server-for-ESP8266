@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#config_div {
+  margin: 0px auto;
+  
+  background-color: #d0e1f6;  
+}
+
+#title {
+  
+  text-align: center;
+  padding:5px;  
+  height: 20px;
+}
+
+#config-content{
+ 
+ height: 600px;
+ text-align: center;
+ padding: 10px;
+}
+
+#config-commandbar{
+ 
+ heigth: 50px;
+ text-align: center;
+ padding: 10px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.ui-custom-txt {
+    width: 30px;
+}
