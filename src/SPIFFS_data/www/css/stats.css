@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stats_div {
+  margin: 0px auto;
+  
+  background-color: #d0e1f6;  
+}
+
+#main{
+  
+ }
+ 
+#title {
+  
+  text-align: center;
+  padding:5px;  
+  height: 20px;
+}
+
+#settings {
+
+  background: white;    
+}
+
+.textclass {
+
+  font-family: Roboto,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+#stats-content{
+ 
+ width: 300px;
+ height: 600px;
+ text-align: center;
+ padding: 10px;
+}
+
+#stats-commandbar{
+ 
+ heigth: 50px;
+ text-align: center;
+ padding: 10px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.ui-custom-txt {
+    width: 30px;
+}
